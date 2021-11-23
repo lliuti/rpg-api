@@ -31,10 +31,67 @@ model Character {
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   name        String
+  picture_url String?     @default("https://ccba.du.edu.om/wp-content/uploads/2017/12/nobody_m.original.jpg")      
   occupation  String?     @default("-")
   age         Int?        @default(0)
   archetype   String?     @default("-")
   exp         String?     @default("50%")
-  
+  sheet       Sheet?
+
   @@map("characters")
+}
+
+model Sheet {
+  id              String      @id @default(uuid()) @unique
+  character_id    String?   
+  character       Character?  @relation(fields: [character_id], references: [id])
+
+  max_life        String?   @default("0")
+  curr_life       String?   @default("0")
+
+  max_san         String?   @default("0")
+  curr_san        String?   @default("0")
+
+  max_eff         String?   @default("0")
+  curr_eff        String?   @default("0")
+
+  for_attr   String?   @default("0")
+  int_attr   String?   @default("0")
+  pre_attr   String?   @default("0")
+  agi_attr   String?   @default("0")
+  vig_attr   String?   @default("0")
+  
+  atletismo_skill         String?   @default("0")
+  atualidades_skill       String?   @default("0")
+  ciencia_skill           String?   @default("0")
+  diplomacia_skill        String?   @default("0")
+  enganacao_skill         String?   @default("0")
+  fortitude_skill         String?   @default("0")
+  furtividade_skill       String?   @default("0")
+  intimidacao_skill       String?   @default("0")
+  investigacao_skill      String?   @default("0")
+  luta_skill              String?   @default("0")
+  medicina_skill          String?   @default("0")
+  ocultismo_skill         String?   @default("0")
+  percepcao_skill         String?   @default("0")
+  pilotagem_skill         String?   @default("0")
+  pontaria_skill          String?   @default("0")
+  prestidigitacao_skill   String?   @default("0")
+  profissao_skill         String?   @default("0")
+  reflexos_skill          String?   @default("0")
+  religiao_skill          String?   @default("0")
+  tatica_skill            String?   @default("0")
+  tecnologia_skill        String?   @default("0")
+  vontade_skill           String?   @default("0")
+
+  defesa_def        String?   @default("0")
+  fisico_res        String?   @default("0")
+  balistico_res     String?   @default("0")
+  sangue_res        String?   @default("0")
+  conhecimento_res  String?   @default("0")
+  morte_res         String?   @default("0")
+  energia_res       String?   @default("0")
+  medo_res          String?   @default("0")
+
+  @@map("sheets")
 }
