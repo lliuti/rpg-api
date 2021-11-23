@@ -5,9 +5,9 @@ const authenticatePlayerController = async (req, res) => {
 
   try {
     const token = await authenticatePlayerService({ username, password });
-    res.status(201).json(token);
+    return res.status(201).json(token);
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    return res.status(400).json({ error: err.message });
   }
 };
 
