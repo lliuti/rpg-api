@@ -17,6 +17,12 @@ const createCharacterService = async ({
     },
   });
 
+  await prisma.sheet.create({
+    data: {
+      character_id: character.id,
+    },
+  });
+
   return character;
 };
 
