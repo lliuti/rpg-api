@@ -10,9 +10,9 @@ const createPlayerController = async (req, res) => {
       email,
       password,
     });
-    res.status(201).json(player);
+    return res.status(201).json(player);
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    return res.status(400).json({ error: err.message });
   }
 };
 
