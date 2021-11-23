@@ -19,6 +19,22 @@ model Player {
   email       String      @unique
   password    String
   admin       Boolean?     @default(false)
+  characters  Character[]
 
   @@map("players")
+}
+
+model Character {
+  id          String      @id @default(uuid()) @unique
+  player_id   String?      
+  player      Player?     @relation(fields: [player_id], references: [id])
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  name        String
+  occupation  String?     @default("-")
+  age         Int?        @default(0)
+  archetype   String?     @default("-")
+  exp         String?     @default("50%")
+  
+  @@map("characters")
 }
