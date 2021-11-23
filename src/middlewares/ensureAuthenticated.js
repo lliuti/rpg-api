@@ -2,7 +2,7 @@ const { request } = require("express");
 const jwt = require("jsonwebtoken");
 const prisma = require("../database/index");
 
-const ensureAuthenticated = (req, res, next) => {
+const ensureAuthenticated = async (req, res, next) => {
   const { authorization } = req.headers;
   if (!authorization) {
     return res.status(401).json({ error: "Missing token." });
@@ -23,7 +23,7 @@ const ensureAuthenticated = (req, res, next) => {
       return res.status(401).json({ error: "Couldn't find any player." });
     }
 
-    request.player_id = sub;
+    req.player_id = sub;
     return next();
   } catch (err) {
     return res.status(401).json({ error: err.message });
