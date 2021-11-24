@@ -3,11 +3,13 @@ const createPlayer = require("./modules/player/createPlayer/createPlayerControll
 const authenticatePlayer = require("./modules/player/authenticatePlayer/authenticatePlayerController");
 const createCharacter = require("./modules/character/createCharacter/createCharacterController");
 const listMyCharacters = require("./modules/character/listMyCharacters/listMyCharactersController");
+const listCharactersForDashboardController = require("./modules/character/listCharactersForDashboard/listCharactersForDashboardController");
 const getCharacterSheet = require("./modules/character/getCharacterSheet/getCharacterSheetController");
 const updateCharacterPicture = require("./modules/character/updateCharacterPicture/updateCharacterPictureController");
 const updateCharacterLife = require("./modules/character/updateCharacterLife/updateCharacterLifeController");
 const updateCharacterSanity = require("./modules/character/updateCharacterSanity/updateCharacterSanityController");
 const updateCharacterEffort = require("./modules/character/updateCharacterEffort/updateCharacterEffortController");
+const isAdmin = require("./modules/player/isAdmin/isAdminController");
 const rollDice = require("./modules/dice/rollDice/rollDiceController");
 const ensureAuthenticated = require("./middlewares/ensureAuthenticated");
 
@@ -20,6 +22,8 @@ routes.post("/players", createPlayer);
 // AUTHENTICATE PLAYER
 routes.post("/login", authenticatePlayer);
 
+routes.get("/players/:player_id/admin", isAdmin);
+
 // -----------------
 
 // CHARACTERS
@@ -31,6 +35,13 @@ routes.get("/characters", ensureAuthenticated, listMyCharacters);
 
 // GET CHARACTER SHEET
 routes.get("/characters/:character_id", ensureAuthenticated, getCharacterSheet);
+
+// LIST CHARACTERS FOR DASHBOARD
+routes.get(
+  "/dashboard/characters",
+  ensureAuthenticated,
+  listCharactersForDashboardController
+);
 
 // UPDATE CHARACTER PICTURE URL
 routes.patch(
