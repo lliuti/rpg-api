@@ -1,4 +1,5 @@
 const prisma = require("../../../database");
+const getSocketInstance = require("../../../app");
 
 const updateCharacterSanityService = async ({
   character_id,
@@ -29,6 +30,11 @@ const updateCharacterSanityService = async ({
     currSan,
     maxSan,
   };
+
+  getSocketInstance.getSocketInstance().emit("vitalsChanged", {
+    currSan,
+    maxSan,
+  });
 
   return responseObject;
 };
