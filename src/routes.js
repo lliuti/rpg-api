@@ -4,6 +4,11 @@ const authenticatePlayer = require("./modules/player/authenticatePlayer/authenti
 const createCharacter = require("./modules/character/createCharacter/createCharacterController");
 const listMyCharacters = require("./modules/character/listMyCharacters/listMyCharactersController");
 const getCharacterSheet = require("./modules/character/getCharacterSheet/getCharacterSheetController");
+const updateCharacterPicture = require("./modules/character/updateCharacterPicture/updateCharacterPictureController");
+const updateCharacterLife = require("./modules/character/updateCharacterLife/updateCharacterLifeController");
+const updateCharacterSanity = require("./modules/character/updateCharacterSanity/updateCharacterSanityController");
+const updateCharacterEffort = require("./modules/character/updateCharacterEffort/updateCharacterEffortController");
+const rollDice = require("./modules/dice/rollDice/rollDiceController");
 const ensureAuthenticated = require("./middlewares/ensureAuthenticated");
 
 const routes = Router();
@@ -26,5 +31,39 @@ routes.get("/characters", ensureAuthenticated, listMyCharacters);
 
 // GET CHARACTER SHEET
 routes.get("/characters/:character_id", ensureAuthenticated, getCharacterSheet);
+
+// UPDATE CHARACTER PICTURE URL
+routes.patch(
+  "/characters/:character_id/picture",
+  ensureAuthenticated,
+  updateCharacterPicture
+);
+
+// UPDATE CHARACTER LIFE
+routes.put(
+  "/characters/:character_id/life",
+  ensureAuthenticated,
+  updateCharacterLife
+);
+
+// UPDATE CHARACTER SANITY
+routes.put(
+  "/characters/:character_id/sanity",
+  ensureAuthenticated,
+  updateCharacterSanity
+);
+
+// UPDATE CHARACTER EFFORT
+routes.put(
+  "/characters/:character_id/effort",
+  ensureAuthenticated,
+  updateCharacterEffort
+);
+
+// -----------------
+
+// DICES
+// ROLL DICE
+routes.post("/characters/:character_id/dice", ensureAuthenticated, rollDice);
 
 module.exports = routes;
