@@ -6,20 +6,7 @@ const listCharacterAttacksService = async (character_id) => {
       character_id: character_id,
     },
     select: {
-      attack: {
-        select: {
-          id: true,
-          name: true,
-          skill: true,
-          range: true,
-          damage: true,
-          criticalDamage: true,
-          damageType: true,
-          description: true,
-          type: true,
-          weight: true,
-        },
-      },
+      attack: true,
     },
     orderBy: {
       createdAt: "asc",
