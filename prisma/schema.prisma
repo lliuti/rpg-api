@@ -38,6 +38,7 @@ model Character {
   exp         String?     @default("50%")
   sheet       Sheet?
   character_attacks   CharacterAttacks[]  
+  character_rituals   CharacterRituals[]  
 
   @@map("characters")
 }
@@ -127,4 +128,35 @@ model CharacterAttacks {
   attack         Attack?  @relation(fields: [attack_id], references: [id])
 
   @@map("character_attacks")
+}
+
+model Ritual {
+  id                String      @id @default(uuid()) @unique
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  name              String
+  description       String
+  element           String
+  circle            String?     @default("1o")
+  cost              String
+  range             String?
+  execTime          String?     @default("Padrao")
+  area              String?
+  duration          String?
+
+  characters        CharacterRituals[]
+
+  @@map("rituals")
+}
+
+model CharacterRituals {
+  id                String      @id @default(uuid()) @unique
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  character_id      String
+  character         Character?  @relation(fields: [character_id], references: [id])
+  ritual_id         String
+  ritual            Ritual?  @relation(fields: [ritual_id], references: [id])
+
+  @@map("character_rituals")
 }
