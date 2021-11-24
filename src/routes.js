@@ -3,8 +3,11 @@ const createPlayer = require("./modules/player/createPlayer/createPlayerControll
 const authenticatePlayer = require("./modules/player/authenticatePlayer/authenticatePlayerController");
 const createCharacter = require("./modules/character/createCharacter/createCharacterController");
 const createAttack = require("./modules/attack/createAttack/createAttackController");
+const createRitual = require("./modules/ritual/createRitual/createRitualController");
 const listAttacks = require("./modules/attack/listAttacks/listAttacksController");
+const listRituals = require("./modules/ritual/listRituals/listRitualsController");
 const listCharacterAttacks = require("./modules/attack/listCharacterAttacks/listCharacterAttacksController");
+const listCharacterRituals = require("./modules/ritual/listCharacterRituals/listCharacterRitualsController");
 const listMyCharacters = require("./modules/character/listMyCharacters/listMyCharactersController");
 const listCharactersForDashboardController = require("./modules/character/listCharactersForDashboard/listCharactersForDashboardController");
 const getCharacterSheet = require("./modules/character/getCharacterSheet/getCharacterSheetController");
@@ -15,6 +18,7 @@ const updateCharacterEffort = require("./modules/character/updateCharacterEffort
 const isAdmin = require("./modules/player/isAdmin/isAdminController");
 const rollDice = require("./modules/dice/rollDice/rollDiceController");
 const assignAttackToCharacter = require("./modules/attack/assignAttackToCharacter/assignAttackToCharacterController");
+const assignRitualToCharacter = require("./modules/ritual/assignRitualToCharacter/assignRitualToCharacterController");
 const ensureAuthenticated = require("./middlewares/ensureAuthenticated");
 
 const routes = Router();
@@ -82,11 +86,25 @@ routes.get(
   listCharacterAttacks
 );
 
+// LIST CHARACTER RITUALS
+routes.get(
+  "/characters/:character_id/rituals",
+  ensureAuthenticated,
+  listCharacterRituals
+);
+
 // ASSIGN ATTACK TO CHARACTER
 routes.post(
   "/characters/:character_id/attacks/:attack_id",
   ensureAuthenticated,
   assignAttackToCharacter
+);
+
+// ASSIGN RITUAL TO CHARACTER
+routes.post(
+  "/characters/:character_id/rituals/:ritual_id",
+  ensureAuthenticated,
+  assignRitualToCharacter
 );
 
 // -----------------
@@ -103,5 +121,14 @@ routes.post("/attacks", ensureAuthenticated, createAttack);
 
 // LIST ALL ATTACKS
 routes.get("/attacks", ensureAuthenticated, listAttacks);
+
+// -----------------
+
+// RITUALS
+// CREATE A NEW RITUAL
+routes.post("/rituals", ensureAuthenticated, createRitual);
+
+// LIST ALL RITUALS
+routes.get("/rituals", ensureAuthenticated, listRituals);
 
 module.exports = routes;
