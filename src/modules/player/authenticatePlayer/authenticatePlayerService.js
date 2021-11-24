@@ -24,7 +24,14 @@ const authenticatePlayerService = async ({ username, password }) => {
     subject: player.id,
   });
 
-  return token;
+  return {
+    token,
+    player: {
+      id: player.id,
+      username: player.username,
+      email: player.email,
+    },
+  };
 };
 
 module.exports = authenticatePlayerService;
