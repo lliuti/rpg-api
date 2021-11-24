@@ -11,15 +11,15 @@ datasource db {
 }
 
 model Player {
-  id          String      @id @default(uuid()) @unique
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-  name        String
-  username    String      @unique
-  email       String      @unique
-  password    String
-  admin       Boolean?     @default(false)
-  characters  Character[]
+  id                  String      @id @default(uuid()) @unique
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+  name                String
+  username            String      @unique
+  email               String      @unique
+  password            String
+  admin               Boolean?     @default(false)
+  characters          Character[]
 
   @@map("players")
 }
@@ -37,6 +37,7 @@ model Character {
   archetype   String?     @default("-")
   exp         String?     @default("50%")
   sheet       Sheet?
+  character_attacks   CharacterAttacks[]  
 
   @@map("characters")
 }
@@ -94,4 +95,36 @@ model Sheet {
   medo_res          String?   @default("0")
 
   @@map("sheets")
+}
+
+model Attack {
+  id                String      @id @default(uuid()) @unique
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  name              String
+  type              String?
+  skill             String
+  range             String
+  damage            String
+  damageType        String
+  critical          String
+  criticalDamage    String?
+  weight            String?
+  description       String?
+
+  characters        CharacterAttacks[]
+
+  @@map("attacks")
+}
+
+model CharacterAttacks {
+  id                String      @id @default(uuid()) @unique
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  character_id      String
+  character         Character?  @relation(fields: [character_id], references: [id])
+  attack_id      String
+  attack         Attack?  @relation(fields: [attack_id], references: [id])
+
+  @@map("character_attacks")
 }
