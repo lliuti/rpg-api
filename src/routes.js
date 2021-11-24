@@ -2,6 +2,9 @@ const Router = require("express/lib/router");
 const createPlayer = require("./modules/player/createPlayer/createPlayerController");
 const authenticatePlayer = require("./modules/player/authenticatePlayer/authenticatePlayerController");
 const createCharacter = require("./modules/character/createCharacter/createCharacterController");
+const createAttack = require("./modules/attack/createAttack/createAttackController");
+const listAttacks = require("./modules/attack/listAttacks/listAttacksController");
+const listCharacterAttacks = require("./modules/attack/listCharacterAttacks/listCharacterAttacksController");
 const listMyCharacters = require("./modules/character/listMyCharacters/listMyCharactersController");
 const listCharactersForDashboardController = require("./modules/character/listCharactersForDashboard/listCharactersForDashboardController");
 const getCharacterSheet = require("./modules/character/getCharacterSheet/getCharacterSheetController");
@@ -11,6 +14,7 @@ const updateCharacterSanity = require("./modules/character/updateCharacterSanity
 const updateCharacterEffort = require("./modules/character/updateCharacterEffort/updateCharacterEffortController");
 const isAdmin = require("./modules/player/isAdmin/isAdminController");
 const rollDice = require("./modules/dice/rollDice/rollDiceController");
+const assignAttackToCharacter = require("./modules/attack/assignAttackToCharacter/assignAttackToCharacterController");
 const ensureAuthenticated = require("./middlewares/ensureAuthenticated");
 
 const routes = Router();
@@ -71,10 +75,33 @@ routes.put(
   updateCharacterEffort
 );
 
+// LIST CHARACTER ATTACKS
+routes.get(
+  "/characters/:character_id/attacks",
+  ensureAuthenticated,
+  listCharacterAttacks
+);
+
+// ASSIGN ATTACK TO CHARACTER
+routes.post(
+  "/characters/:character_id/attacks/:attack_id",
+  ensureAuthenticated,
+  assignAttackToCharacter
+);
+
 // -----------------
 
 // DICES
 // ROLL DICE
 routes.post("/characters/:character_id/dice", ensureAuthenticated, rollDice);
+
+// -----------------
+
+// ATTACKS
+// CREATE A NEW ATTACK
+routes.post("/attacks", ensureAuthenticated, createAttack);
+
+// LIST ALL ATTACKS
+routes.get("/attacks", ensureAuthenticated, listAttacks);
 
 module.exports = routes;
