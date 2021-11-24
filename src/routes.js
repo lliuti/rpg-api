@@ -10,6 +10,7 @@ const listCharacterAttacks = require("./modules/attack/listCharacterAttacks/list
 const listCharacterRituals = require("./modules/ritual/listCharacterRituals/listCharacterRitualsController");
 const listMyCharacters = require("./modules/character/listMyCharacters/listMyCharactersController");
 const listCharactersForDashboardController = require("./modules/character/listCharactersForDashboard/listCharactersForDashboardController");
+const searchAssignableAttacks = require("./modules/attack/searchAssignableAttacks/searchAssignableAttacksController");
 const getCharacterSheet = require("./modules/character/getCharacterSheet/getCharacterSheetController");
 const updateCharacterPicture = require("./modules/character/updateCharacterPicture/updateCharacterPictureController");
 const updateCharacterLife = require("./modules/character/updateCharacterLife/updateCharacterLifeController");
@@ -105,6 +106,20 @@ routes.post(
   "/characters/:character_id/rituals/:ritual_id",
   ensureAuthenticated,
   assignRitualToCharacter
+);
+
+// SEARCH ASSIGNABLE RITUALS
+// routes.get(
+//   "/characters/:character_id/rituals/assignable",
+//   ensureAuthenticated,
+//   searchAssignableRituals
+// );
+
+// SEARCH ASSIGNABLE ATTACKS
+routes.get(
+  "/characters/:character_id/attacks/assignable",
+  ensureAuthenticated,
+  searchAssignableAttacks
 );
 
 // -----------------
