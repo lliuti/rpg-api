@@ -1,4 +1,5 @@
 const prisma = require("../../../database");
+const getSocketInstance = require("../../../app");
 
 const updateCharacterLifeService = async ({
   character_id,
@@ -29,6 +30,11 @@ const updateCharacterLifeService = async ({
     currLife,
     maxLife,
   };
+
+  getSocketInstance.getSocketInstance().emit("vitalsChanged", {
+    currLife,
+    maxLife,
+  });
 
   return responseObject;
 };
