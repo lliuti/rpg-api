@@ -1,4 +1,5 @@
 const prisma = require("../../../database");
+const getSocketInstance = require("../../../app");
 
 const rollDiceService = async ({
   character_id,
@@ -28,6 +29,14 @@ const rollDiceService = async ({
     diceRolls: diceRolls,
     diceResult: diceTotalResult,
   };
+
+  getSocketInstance.getSocketInstance().emit("diceRoll", {
+    character: character.name,
+    dices: diceAmount,
+    faces: diceFaces,
+    rolls: diceRolls,
+    totalResult: diceTotalResult,
+  });
 
   return responseObject;
 };
