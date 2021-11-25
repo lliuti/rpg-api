@@ -13,10 +13,14 @@ const listCharactersForDashboardController = require("./modules/character/listCh
 const searchAssignableAttacks = require("./modules/attack/searchAssignableAttacks/searchAssignableAttacksController");
 const searchAssignableRituals = require("./modules/ritual/searchAssignableRituals/searchAssignableRitualsController");
 const getCharacterSheet = require("./modules/character/getCharacterSheet/getCharacterSheetController");
-const updateCharacterPicture = require("./modules/character/updateCharacterPicture/updateCharacterPictureController");
-const updateCharacterLife = require("./modules/character/updateCharacterLife/updateCharacterLifeController");
-const updateCharacterSanity = require("./modules/character/updateCharacterSanity/updateCharacterSanityController");
-const updateCharacterEffort = require("./modules/character/updateCharacterEffort/updateCharacterEffortController");
+const updateCharacterPicture = require("./modules/character/update/updateCharacterPicture/updateCharacterPictureController");
+const updateCharacterLife = require("./modules/character/update/vitals/updateCharacterLife/updateCharacterLifeController");
+const updateCharacterSanity = require("./modules/character/update/vitals/updateCharacterSanity/updateCharacterSanityController");
+const updateCharacterEffort = require("./modules/character/update/vitals/updateCharacterEffort/updateCharacterEffortController");
+const updateCharacterInfo = require("./modules/character/update/updateCharacterInfo/updateCharacterInfoController");
+const updateCharacterAttributes = require("./modules/character/update/updateCharacterAttributes/updateCharacterAttributesController");
+const updateCharacterSkills = require("./modules/character/update/updateCharacterSkills/updateCharacterSkillsController");
+const updateCharacterDefenses = require("./modules/character/update/updateCharacterDefenses/updateCharacterDefensesController");
 const isAdmin = require("./modules/player/isAdmin/isAdminController");
 const rollDice = require("./modules/dice/rollDice/rollDiceController");
 const assignAttackToCharacter = require("./modules/attack/assignAttackToCharacter/assignAttackToCharacterController");
@@ -121,6 +125,34 @@ routes.get(
   "/characters/:character_id/attacks/assignable",
   ensureAuthenticated,
   searchAssignableAttacks
+);
+
+// UPDATE CHARACTER INFO
+routes.put(
+  "/characters/:character_id/info",
+  ensureAuthenticated,
+  updateCharacterInfo
+);
+
+// UPDATE CHARACTER ATTRIBUTES
+routes.put(
+  "/characters/:character_id/attributes",
+  ensureAuthenticated,
+  updateCharacterAttributes
+);
+
+// UPDATE CHARACTER SKILLS
+routes.put(
+  "/characters/:character_id/skills",
+  ensureAuthenticated,
+  updateCharacterSkills
+);
+
+// UPDATE CHARACTER DEFENSES
+routes.put(
+  "/characters/:character_id/defenses",
+  ensureAuthenticated,
+  updateCharacterDefenses
 );
 
 // -----------------
