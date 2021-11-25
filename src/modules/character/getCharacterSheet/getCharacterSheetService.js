@@ -23,6 +23,7 @@ const getCharacterSheetService = async (character_id) => {
 
   const characterSheet = {
     // details
+    id: character.id,
     name: character.name,
     age: character.age,
     occupation: character.occupation,
