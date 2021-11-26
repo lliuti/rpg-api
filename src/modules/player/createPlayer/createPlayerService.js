@@ -3,15 +3,17 @@ const bcryptjs = require("bcryptjs");
 
 const createPlayerService = async ({ name, username, email, password }) => {
   const hashed_password = await bcryptjs.hash(password, 8);
+  const lowerUsername = username.toLowerCase();
+  const lowerEmail = email.toLowerCase();
 
   let player = await prisma.player.findFirst({
     where: {
       OR: [
         {
-          email: email,
+          email: lowerEmail,
         },
         {
-          username: username,
+          username: lowerUsername,
         },
       ],
     },
@@ -31,8 +33,8 @@ const createPlayerService = async ({ name, username, email, password }) => {
   player = await prisma.player.create({
     data: {
       name,
-      username,
-      email,
+      username: lowerUsername,
+      email: lowerEmail,
       password: hashed_password,
     },
     select: {
