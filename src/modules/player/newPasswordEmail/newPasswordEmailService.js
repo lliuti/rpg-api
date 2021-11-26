@@ -2,6 +2,8 @@ const prisma = require("../../../database/index");
 const sendMail = require("../../../utils/sendMail");
 
 const newPasswordEmailService = async (usernameOrEmail) => {
+  console.log(`Attempt of sending reset email to ${usernameOrEmail}`);
+
   const player = await prisma.player.findFirst({
     where: {
       OR: [
