@@ -3,14 +3,10 @@ const nodemailer = require("nodemailer");
 const sendMail = async ({ email_to, email_subject, email_text }) => {
   const transporter = nodemailer.createTransport({
     service: process.env.EMAIL_SERVICE,
-    secure: true,
-    port: 465,
-    // secureConnection: false,
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASSWORD,
     },
-    // ignoreTLS: true,
   });
 
   const info = await transporter.sendMail({
