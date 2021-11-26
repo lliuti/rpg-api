@@ -3,15 +3,16 @@ const sendMail = require("../../../utils/sendMail");
 
 const newPasswordEmailService = async (usernameOrEmail) => {
   console.log(`Attempt of sending reset email to ${usernameOrEmail}`);
+  const lowerUsernameOrEmail = usernameOrEmail.toLowerCase();
 
   const player = await prisma.player.findFirst({
     where: {
       OR: [
         {
-          username: usernameOrEmail,
+          username: lowerUsernameOrEmail,
         },
         {
-          email: usernameOrEmail,
+          email: lowerUsernameOrEmail,
         },
       ],
     },
