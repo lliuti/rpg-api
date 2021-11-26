@@ -26,6 +26,8 @@ const rollDice = require("./modules/dice/rollDice/rollDiceController");
 const assignAttackToCharacter = require("./modules/attack/assignAttackToCharacter/assignAttackToCharacterController");
 const assignRitualToCharacter = require("./modules/ritual/assignRitualToCharacter/assignRitualToCharacterController");
 const ensureAuthenticated = require("./middlewares/ensureAuthenticated");
+const newPasswordEmail = require("./modules/player/newPasswordEmail/newPasswordEmailController");
+const updatePassword = require("./modules/player/updatePassword/updatePasswordController");
 
 const routes = Router();
 
@@ -36,7 +38,14 @@ routes.post("/players", createPlayer);
 // AUTHENTICATE PLAYER
 routes.post("/login", authenticatePlayer);
 
+// GET IF PLAYER IS ADMIN
 routes.get("/players/:player_id/admin", isAdmin);
+
+// SEND PASSWORD RESET EMAIL
+routes.post("/players/new-password-send-email", newPasswordEmail);
+
+// UPDATE PASSWORD
+routes.post("/players/:player_id/update-password", updatePassword);
 
 // -----------------
 
