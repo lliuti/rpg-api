@@ -3,6 +3,8 @@ const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const authenticatePlayerService = async ({ username, password }) => {
+  console.log(`Attempt of login with username: ${username}`);
+
   const player = await prisma.player.findFirst({
     where: {
       username: username,
