@@ -27,7 +27,7 @@ model Player {
 model Character {
   id          String      @id @default(uuid()) @unique
   player_id   String?      
-  player      Player?     @relation(fields: [player_id], references: [id])
+  player      Player?     @relation(fields: [player_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   name        String
@@ -46,7 +46,7 @@ model Character {
 model Sheet {
   id              String      @id @default(uuid()) @unique
   character_id    String?   
-  character       Character?  @relation(fields: [character_id], references: [id])
+  character       Character?  @relation(fields: [character_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   max_life        String?   @default("0")
   curr_life       String?   @default("0")
@@ -123,7 +123,7 @@ model CharacterAttacks {
   createdAt         DateTime    @default(now())
   updatedAt         DateTime    @updatedAt
   character_id      String
-  character         Character?  @relation(fields: [character_id], references: [id])
+  character         Character?  @relation(fields: [character_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   attack_id      String
   attack         Attack?  @relation(fields: [attack_id], references: [id])
 
@@ -154,7 +154,7 @@ model CharacterRituals {
   createdAt         DateTime    @default(now())
   updatedAt         DateTime    @updatedAt
   character_id      String
-  character         Character?  @relation(fields: [character_id], references: [id])
+  character         Character?  @relation(fields: [character_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   ritual_id         String
   ritual            Ritual?  @relation(fields: [ritual_id], references: [id])
 
