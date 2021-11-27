@@ -77,6 +77,7 @@ routes.get("/characters/:character_id", ensureAuthenticated, getCharacterSheet);
 routes.get(
   "/dashboard/characters",
   ensureAuthenticated,
+  ensureAdmin,
   listCharactersForDashboardController
 );
 
@@ -126,6 +127,7 @@ routes.get(
 routes.post(
   "/characters/:character_id/attacks/:attack_id",
   ensureAuthenticated,
+  ensureAdmin,
   assignAttackToCharacter
 );
 
@@ -133,6 +135,7 @@ routes.post(
 routes.post(
   "/characters/:character_id/rituals/:ritual_id",
   ensureAuthenticated,
+  ensureAdmin,
   assignRitualToCharacter
 );
 
@@ -140,6 +143,7 @@ routes.post(
 routes.get(
   "/characters/:character_id/rituals/assignable",
   ensureAuthenticated,
+  ensureAdmin,
   searchAssignableRituals
 );
 
@@ -147,6 +151,7 @@ routes.get(
 routes.get(
   "/characters/:character_id/attacks/assignable",
   ensureAuthenticated,
+  ensureAdmin,
   searchAssignableAttacks
 );
 
@@ -188,7 +193,7 @@ routes.post("/characters/:character_id/dice", ensureAuthenticated, rollDice);
 
 // ATTACKS
 // CREATE A NEW ATTACK
-routes.post("/attacks", ensureAuthenticated, createAttack);
+routes.post("/attacks", ensureAuthenticated, ensureAdmin, createAttack);
 
 // LIST ALL ATTACKS
 routes.get("/attacks", ensureAuthenticated, listAttacks);
@@ -197,7 +202,7 @@ routes.get("/attacks", ensureAuthenticated, listAttacks);
 
 // RITUALS
 // CREATE A NEW RITUAL
-routes.post("/rituals", ensureAuthenticated, createRitual);
+routes.post("/rituals", ensureAuthenticated, ensureAdmin, createRitual);
 
 // LIST ALL RITUALS
 routes.get("/rituals", ensureAuthenticated, listRituals);
