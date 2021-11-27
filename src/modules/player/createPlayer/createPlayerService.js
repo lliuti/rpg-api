@@ -27,7 +27,10 @@ const createPlayerService = async ({ name, username, email, password }) => {
   });
 
   if (player) {
-    return player;
+    console.log(
+      `There is already a player with the username: ${lowerUsername} or email: ${lowerEmail}`
+    );
+    throw new Error("There is already a player with this email/username");
   }
 
   player = await prisma.player.create({
