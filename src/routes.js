@@ -4,6 +4,7 @@ const authenticatePlayer = require("./modules/player/authenticatePlayer/authenti
 const createCharacter = require("./modules/character/createCharacter/createCharacterController");
 const createAttack = require("./modules/attack/createAttack/createAttackController");
 const createRitual = require("./modules/ritual/createRitual/createRitualController");
+const listAllPlayers = require("./modules/player/listAllPlayers/listAllPlayersController");
 const listAttacks = require("./modules/attack/listAttacks/listAttacksController");
 const listRituals = require("./modules/ritual/listRituals/listRitualsController");
 const listCharacterAttacks = require("./modules/attack/listCharacterAttacks/listCharacterAttacksController");
@@ -26,6 +27,7 @@ const rollDice = require("./modules/dice/rollDice/rollDiceController");
 const assignAttackToCharacter = require("./modules/attack/assignAttackToCharacter/assignAttackToCharacterController");
 const assignRitualToCharacter = require("./modules/ritual/assignRitualToCharacter/assignRitualToCharacterController");
 const ensureAuthenticated = require("./middlewares/ensureAuthenticated");
+const ensureAdmin = require("./middlewares/ensureAdmin");
 const newPasswordEmail = require("./modules/player/newPasswordEmail/newPasswordEmailController");
 const updatePassword = require("./modules/player/updatePassword/updatePasswordController");
 
@@ -46,6 +48,8 @@ routes.post("/players/new-password-send-email", newPasswordEmail);
 
 // UPDATE PASSWORD
 routes.post("/players/:player_id/update-password", updatePassword);
+
+routes.get("/players", ensureAuthenticated, ensureAdmin, listAllPlayers);
 
 // -----------------
 
