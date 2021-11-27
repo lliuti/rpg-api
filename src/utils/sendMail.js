@@ -17,7 +17,9 @@ const sendMail = async ({ email_to, email_subject, email_text }) => {
     // html: "<b>Hello world?</b>",
   });
 
-  console.log(`email sent: ${info.messageId}`);
+  console.log(
+    `password recover email sent to ${email_to}. MessageId: ${info.messageId}`
+  );
 };
 
 module.exports = sendMail;
