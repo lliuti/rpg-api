@@ -1,5 +1,6 @@
 const Router = require("express/lib/router");
 const createPlayer = require("./modules/player/createPlayer/createPlayerController");
+const deletePlayer = require("./modules/player/deletePlayer/deletePlayerController");
 const authenticatePlayer = require("./modules/player/authenticatePlayer/authenticatePlayerController");
 const createCharacter = require("./modules/character/createCharacter/createCharacterController");
 const createAttack = require("./modules/attack/createAttack/createAttackController");
@@ -49,7 +50,16 @@ routes.post("/players/new-password-send-email", newPasswordEmail);
 // UPDATE PASSWORD
 routes.post("/players/:player_id/update-password", updatePassword);
 
+// LIST ALL PLAYERS
 routes.get("/players", ensureAuthenticated, ensureAdmin, listAllPlayers);
+
+// DELETE PLAYER
+routes.delete(
+  "/players/:player_id",
+  ensureAuthenticated,
+  ensureAdmin,
+  deletePlayer
+);
 
 // -----------------
 
