@@ -9,6 +9,9 @@ const searchAssignableRitualsService = async (character_id) => {
         },
       },
     },
+    orderBy: {
+      name: "asc",
+    },
   });
 
   return assignableRituals;
