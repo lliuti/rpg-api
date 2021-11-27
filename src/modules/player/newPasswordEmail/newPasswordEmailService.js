@@ -19,7 +19,9 @@ const newPasswordEmailService = async (usernameOrEmail) => {
   });
 
   if (!player) {
-    throw new Error("Couldn't find any player with this username/email");
+    throw new Error(
+      `Couldn't find any player with this username/email: ${usernameOrEmail}`
+    );
   }
 
   const email_to = player.email;
