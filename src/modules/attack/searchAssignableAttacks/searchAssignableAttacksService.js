@@ -9,6 +9,9 @@ const searchAssignableAttacksService = async (character_id) => {
         },
       },
     },
+    orderBy: {
+      name: "asc",
+    },
   });
 
   return assignableAttacks;
