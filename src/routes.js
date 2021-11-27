@@ -3,6 +3,7 @@ const createPlayer = require("./modules/player/createPlayer/createPlayerControll
 const deletePlayer = require("./modules/player/deletePlayer/deletePlayerController");
 const authenticatePlayer = require("./modules/player/authenticatePlayer/authenticatePlayerController");
 const createCharacter = require("./modules/character/createCharacter/createCharacterController");
+const deleteCharacter = require("./modules/character/deleteCharacter/deleteCharacterController");
 const createAttack = require("./modules/attack/createAttack/createAttackController");
 const createRitual = require("./modules/ritual/createRitual/createRitualController");
 const listAllPlayers = require("./modules/player/listAllPlayers/listAllPlayersController");
@@ -79,6 +80,14 @@ routes.get(
   ensureAuthenticated,
   ensureAdmin,
   listCharactersForDashboardController
+);
+
+// DELETE CHARACTERS
+routes.delete(
+  "/characters/:character_id",
+  ensureAuthenticated,
+  ensureAdmin,
+  deleteCharacter
 );
 
 // UPDATE CHARACTER PICTURE URL
