@@ -1,20 +1,18 @@
 const Router = require("express/lib/router");
+
 const createPlayer = require("./modules/player/createPlayer/createPlayerController");
+const updatePlayer = require("./modules/player/updatePlayer/updatePlayerController");
+const listAllPlayers = require("./modules/player/listAllPlayers/listAllPlayersController");
 const deletePlayer = require("./modules/player/deletePlayer/deletePlayerController");
 const authenticatePlayer = require("./modules/player/authenticatePlayer/authenticatePlayerController");
+const isAdmin = require("./modules/player/isAdmin/isAdminController");
+const newPasswordEmail = require("./modules/player/newPasswordEmail/newPasswordEmailController");
+const updatePassword = require("./modules/player/updatePassword/updatePasswordController");
+
 const createCharacter = require("./modules/character/createCharacter/createCharacterController");
 const deleteCharacter = require("./modules/character/deleteCharacter/deleteCharacterController");
-const createAttack = require("./modules/attack/createAttack/createAttackController");
-const createRitual = require("./modules/ritual/createRitual/createRitualController");
-const listAllPlayers = require("./modules/player/listAllPlayers/listAllPlayersController");
-const listAttacks = require("./modules/attack/listAttacks/listAttacksController");
-const listRituals = require("./modules/ritual/listRituals/listRitualsController");
-const listCharacterAttacks = require("./modules/attack/listCharacterAttacks/listCharacterAttacksController");
-const listCharacterRituals = require("./modules/ritual/listCharacterRituals/listCharacterRitualsController");
 const listMyCharacters = require("./modules/character/listMyCharacters/listMyCharactersController");
 const listCharactersForDashboardController = require("./modules/character/listCharactersForDashboard/listCharactersForDashboardController");
-const searchAssignableAttacks = require("./modules/attack/searchAssignableAttacks/searchAssignableAttacksController");
-const searchAssignableRituals = require("./modules/ritual/searchAssignableRituals/searchAssignableRitualsController");
 const getCharacterSheet = require("./modules/character/getCharacterSheet/getCharacterSheetController");
 const updateCharacterPicture = require("./modules/character/update/updateCharacterPicture/updateCharacterPictureController");
 const updateCharacterLife = require("./modules/character/update/vitals/updateCharacterLife/updateCharacterLifeController");
@@ -24,14 +22,23 @@ const updateCharacterInfo = require("./modules/character/update/updateCharacterI
 const updateCharacterAttributes = require("./modules/character/update/updateCharacterAttributes/updateCharacterAttributesController");
 const updateCharacterSkills = require("./modules/character/update/updateCharacterSkills/updateCharacterSkillsController");
 const updateCharacterDefenses = require("./modules/character/update/updateCharacterDefenses/updateCharacterDefensesController");
-const isAdmin = require("./modules/player/isAdmin/isAdminController");
-const rollDice = require("./modules/dice/rollDice/rollDiceController");
+
+const listCharacterAttacks = require("./modules/attack/listCharacterAttacks/listCharacterAttacksController");
 const assignAttackToCharacter = require("./modules/attack/assignAttackToCharacter/assignAttackToCharacterController");
+const createAttack = require("./modules/attack/createAttack/createAttackController");
+const listAttacks = require("./modules/attack/listAttacks/listAttacksController");
+const searchAssignableAttacks = require("./modules/attack/searchAssignableAttacks/searchAssignableAttacksController");
+
+const listCharacterRituals = require("./modules/ritual/listCharacterRituals/listCharacterRitualsController");
 const assignRitualToCharacter = require("./modules/ritual/assignRitualToCharacter/assignRitualToCharacterController");
+const createRitual = require("./modules/ritual/createRitual/createRitualController");
+const listRituals = require("./modules/ritual/listRituals/listRitualsController");
+const searchAssignableRituals = require("./modules/ritual/searchAssignableRituals/searchAssignableRitualsController");
+
+const rollDice = require("./modules/dice/rollDice/rollDiceController");
+
 const ensureAuthenticated = require("./middlewares/ensureAuthenticated");
 const ensureAdmin = require("./middlewares/ensureAdmin");
-const newPasswordEmail = require("./modules/player/newPasswordEmail/newPasswordEmailController");
-const updatePassword = require("./modules/player/updatePassword/updatePasswordController");
 
 const routes = Router();
 
@@ -60,6 +67,14 @@ routes.delete(
   ensureAuthenticated,
   ensureAdmin,
   deletePlayer
+);
+
+// UPDATE PLAYER
+routes.put(
+  "/players/:player_id",
+  ensureAuthenticated,
+  ensureAdmin,
+  updatePlayer
 );
 
 // -----------------
