@@ -13,11 +13,15 @@ const rollDiceService = async ({
   });
 
   const diceFaces = diceFaceAmount.replace("D", "");
-  let diceTotalResult = 0;
   const diceRolls = [];
+  let diceTotalResult = 0;
+  let diceGreater = 0;
 
   for (i = 0; i < diceAmount; i++) {
     const diceResult = Math.floor(Math.random() * diceFaces) + 1;
+    if (diceGreater < diceResult) {
+      diceGreater = diceResult;
+    }
     diceTotalResult += diceResult;
     diceRolls.push(diceResult);
   }
@@ -28,6 +32,7 @@ const rollDiceService = async ({
   const responseObject = {
     diceRolls: diceRolls,
     diceResult: diceTotalResult,
+    diceGreater: diceGreater,
   };
 
   getSocketInstance.getSocketInstance().emit("diceRoll", {
@@ -36,6 +41,7 @@ const rollDiceService = async ({
     faces: diceFaces,
     rolls: diceRolls,
     totalResult: diceTotalResult,
+    greater: diceGreater,
   });
 
   return responseObject;
