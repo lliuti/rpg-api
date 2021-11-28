@@ -16,6 +16,17 @@ const updateCharacterSanityService = async ({
     throw new Error("Couldn't find any character sheet.");
   }
 
+  const character = await prisma.character.findFirst({
+    where: {
+      id: sheet.character_id,
+    },
+  });
+
+  const previousCurrVital = sheet.curr_san;
+  const previousMaxVital = sheet.max_san;
+  const currVital = currSan;
+  const maxVital = maxSan;
+
   await prisma.sheet.updateMany({
     where: {
       character_id: sheet.character_id,
@@ -27,13 +38,19 @@ const updateCharacterSanityService = async ({
   });
 
   const responseObject = {
-    currSan,
-    maxSan,
+    currVital,
+    maxVital,
+    previousCurrVital,
+    previousMaxVital,
   };
 
   getSocketInstance.getSocketInstance().emit("vitalsChanged", {
-    currSan,
-    maxSan,
+    character: character.name,
+    vital: "sanity",
+    currVital,
+    maxVital,
+    previousCurrVital,
+    previousMaxVital,
   });
 
   return responseObject;
