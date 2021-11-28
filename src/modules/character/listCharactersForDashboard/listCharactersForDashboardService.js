@@ -3,7 +3,7 @@ const prisma = require("../../../database/index");
 const listCharactersForDashboardService = async () => {
   const list = await prisma.character.findMany({
     orderBy: {
-      createdAt: "desc",
+      createdAt: "asc",
     },
     select: {
       id: true,
