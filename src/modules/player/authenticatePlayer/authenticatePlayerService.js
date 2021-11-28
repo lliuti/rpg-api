@@ -20,17 +20,19 @@ const authenticatePlayerService = async ({ username, password }) => {
   });
 
   if (!player) {
+    console.log("Player not found with this username/email.");
     throw new Error("Player not found with this username/email.");
   }
 
   const doesPasswordMatch = await bcryptjs.compare(password, player.password);
 
   if (!doesPasswordMatch) {
+    console.log("Incorrect password.");
     throw new Error("Incorrect password.");
   }
 
   const token = jwt.sign({}, process.env.JWT_SECRET, {
-    expiresIn: "1d",
+    expiresIn: "7d",
     subject: player.id,
   });
 
