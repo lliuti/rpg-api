@@ -7,23 +7,28 @@ const createCharacterService = async ({
   archetype,
   player_id,
 }) => {
-  const character = await prisma.character.create({
-    data: {
-      name,
-      occupation,
-      player_id,
-      age,
-      archetype,
-    },
-  });
+  try {
+    const character = await prisma.character.create({
+      data: {
+        name,
+        occupation,
+        player_id,
+        age,
+        archetype,
+      },
+    });
 
-  await prisma.sheet.create({
-    data: {
-      character_id: character.id,
-    },
-  });
+    await prisma.sheet.create({
+      data: {
+        character_id: character.id,
+      },
+    });
 
-  return character;
+    return character;
+  } catch (err) {
+    console.log(err);
+    throw new Error("Couldn't create character");
+  }
 };
 
 module.exports = createCharacterService;
