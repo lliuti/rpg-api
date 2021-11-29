@@ -12,22 +12,27 @@ const createAttackService = async ({
   weight,
   description,
 }) => {
-  const attack = await prisma.attack.create({
-    data: {
-      name,
-      type,
-      skill,
-      range,
-      damage,
-      damageType,
-      critical,
-      criticalDamage,
-      weight,
-      description,
-    },
-  });
+  try {
+    const attack = await prisma.attack.create({
+      data: {
+        name,
+        type,
+        skill,
+        range,
+        damage,
+        damageType,
+        critical,
+        criticalDamage,
+        weight,
+        description,
+      },
+    });
 
-  return attack;
+    return attack;
+  } catch (err) {
+    console.log(err);
+    throw new Error("Couldn't create attack");
+  }
 };
 
 module.exports = createAttackService;
