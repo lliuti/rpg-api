@@ -25,6 +25,14 @@ const rollDiceService = async ({
       }
       diceTotalResult += diceResult;
       diceRolls.push(diceResult);
+
+      await prisma.diceRolls.create({
+        data: {
+          character_id: character_id,
+          dice_face: diceFaces,
+          dice_result: diceResult.toString(),
+        },
+      });
     }
 
     console.log(`\n${character.name} rolled ${diceAmount} d${diceFaces}`);
