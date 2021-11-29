@@ -38,6 +38,8 @@ const listRituals = require("./modules/ritual/listRituals/listRitualsController"
 const searchAssignableRituals = require("./modules/ritual/searchAssignableRituals/searchAssignableRitualsController");
 
 const rollDice = require("./modules/dice/rollDice/rollDiceController");
+const listAllCharacterRollsController = require("./modules/dice/listAllCharacterRolls/listAllCharacterRollsController");
+const listCriticalsByCharacter = require("./modules/dice/listCriticalsByCharacter/listCriticalsByCharacterController");
 
 const ensureAuthenticated = require("./middlewares/ensureAuthenticated");
 const ensureAdmin = require("./middlewares/ensureAdmin");
@@ -214,6 +216,18 @@ routes.put(
 // DICES
 // ROLL DICE
 routes.post("/characters/:character_id/dice", ensureAuthenticated, rollDice);
+
+routes.get(
+  "/characters/:character_id/rolls/critical",
+  ensureAuthenticated,
+  listCriticalsByCharacter
+);
+
+routes.get(
+  "/characters/:character_id/rolls",
+  ensureAuthenticated,
+  listAllCharacterRollsController
+);
 
 // -----------------
 
