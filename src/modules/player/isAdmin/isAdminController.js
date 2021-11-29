@@ -2,7 +2,6 @@ const isAdminService = require("./isAdminService");
 
 const isAdminController = async (req, res) => {
   const { player_id } = req.params;
-
   try {
     const isAdmin = await isAdminService(player_id);
     return res.status(200).json(isAdmin);
