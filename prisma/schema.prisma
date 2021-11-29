@@ -39,6 +39,7 @@ model Character {
   sheet       Sheet?
   character_attacks   CharacterAttacks[]  
   character_rituals   CharacterRituals[]  
+  character_rolls     DiceRolls[]
 
   @@map("characters")
 }
@@ -159,4 +160,15 @@ model CharacterRituals {
   ritual            Ritual?  @relation(fields: [ritual_id], references: [id])
 
   @@map("character_rituals")
+}
+
+model DiceRolls {
+  id                String      @id @default(uuid()) @unique
+  createdAt         DateTime    @default(now())
+  character_id      String
+  character         Character? @relation(fields: [character_id], references: [id])
+  dice_face         String
+  dice_result       String
+
+  @@map("dice_rolls")
 }
