@@ -1,13 +1,18 @@
 const prisma = require("../../../database");
 
 const isAdminService = async (player_id) => {
-  const player = await prisma.player.findFirst({
-    where: { id: player_id },
-  });
+  try {
+    const player = await prisma.player.findFirst({
+      where: { id: player_id },
+    });
 
-  const isAdmin = player.admin;
+    const isAdmin = player.admin;
 
-  return isAdmin;
+    return isAdmin;
+  } catch (err) {
+    console.log(err);
+    throw new Error("Couldn't verify if player is admin");
+  }
 };
 
 module.exports = isAdminService;
