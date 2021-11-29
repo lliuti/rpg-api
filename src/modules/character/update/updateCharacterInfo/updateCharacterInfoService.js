@@ -1,26 +1,17 @@
 const prisma = require("../../../../database");
 
 const updateCharacterInfoService = async ({ character_id, data }) => {
-  const character = await prisma.character.findFirst({
-    where: {
-      id: character_id,
-    },
-  });
-
-  if (!character) {
-    throw new Error("Couldn't find any character");
+  try {
+    await prisma.character.updateMany({
+      where: {
+        id: character_id,
+      },
+      data: data,
+    });
+  } catch (err) {
+    console.log(err);
+    throw new Error("Couldn't update character info");
   }
-
-  await prisma.character.updateMany({
-    where: {
-      id: character_id,
-    },
-    data: data,
-  });
-
-  console.log(
-    `${character.name} updated character info to: ${JSON.stringify(data)}`
-  );
 };
 
 module.exports = updateCharacterInfoService;
