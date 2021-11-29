@@ -26,6 +26,8 @@ const updateCharacterDefenses = require("./modules/character/update/updateCharac
 const listCharacterAttacks = require("./modules/attack/listCharacterAttacks/listCharacterAttacksController");
 const assignAttackToCharacter = require("./modules/attack/assignAttackToCharacter/assignAttackToCharacterController");
 const createAttack = require("./modules/attack/createAttack/createAttackController");
+const editAttack = require("./modules/attack/editAttack/editAttackController");
+const deleteAttack = require("./modules/attack/deleteAttack/deleteAttackController");
 const listAttacks = require("./modules/attack/listAttacks/listAttacksController");
 const searchAssignableAttacks = require("./modules/attack/searchAssignableAttacks/searchAssignableAttacksController");
 
@@ -221,6 +223,17 @@ routes.post("/attacks", ensureAuthenticated, ensureAdmin, createAttack);
 
 // LIST ALL ATTACKS
 routes.get("/attacks", ensureAuthenticated, listAttacks);
+
+// UPDATE ATTACK
+routes.put("/attacks/:attack_id", ensureAuthenticated, ensureAdmin, editAttack);
+
+// DELETE ATTACK
+routes.delete(
+  "/attacks/:attack_id",
+  ensureAuthenticated,
+  ensureAdmin,
+  deleteAttack
+);
 
 // -----------------
 
