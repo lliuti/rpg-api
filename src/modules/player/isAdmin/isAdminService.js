@@ -6,11 +6,14 @@ const isAdminService = async (player_id) => {
       where: { id: player_id },
     });
 
+    if (!player) {
+      throw new Error("Player not found!");
+    }
+
     const isAdmin = player.admin;
 
     return isAdmin;
   } catch (err) {
-    console.log(err);
     throw new Error("Couldn't verify if player is admin");
   }
 };
