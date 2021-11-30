@@ -40,6 +40,7 @@ model Character {
   character_attacks   CharacterAttacks[]  
   character_rituals   CharacterRituals[]  
   character_rolls     DiceRolls[]
+  character_notes     CharacterNotes[]
 
   @@map("characters")
 }
@@ -171,4 +172,16 @@ model DiceRolls {
   dice_result       String
 
   @@map("dice_rolls")
+}
+
+model CharacterNotes {
+  id                String      @id @default(uuid()) @unique
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  character_id      String
+  character         Character? @relation(fields: [character_id], references: [id])
+  note_text         String      @default(" ")
+  background_text   String      @default(" ")
+
+  @@map("character_notes")
 }
