@@ -30,12 +30,14 @@ const editAttack = require("./modules/attack/editAttack/editAttackController");
 const deleteAttack = require("./modules/attack/deleteAttack/deleteAttackController");
 const listAttacks = require("./modules/attack/listAttacks/listAttacksController");
 const searchAssignableAttacks = require("./modules/attack/searchAssignableAttacks/searchAssignableAttacksController");
+const removeAttackFromCharacter = require("./modules/attack/removeAttackFromCharacter/removeAttackFromCharacterController");
 
 const listCharacterRituals = require("./modules/ritual/listCharacterRituals/listCharacterRitualsController");
 const assignRitualToCharacter = require("./modules/ritual/assignRitualToCharacter/assignRitualToCharacterController");
 const createRitual = require("./modules/ritual/createRitual/createRitualController");
 const listRituals = require("./modules/ritual/listRituals/listRitualsController");
 const searchAssignableRituals = require("./modules/ritual/searchAssignableRituals/searchAssignableRitualsController");
+const removeRitualFromCharacter = require("./modules/ritual/removeRitualFromCharacter/removeRitualFromCharacterController");
 
 const rollDice = require("./modules/dice/rollDice/rollDiceController");
 const listAllCharacterRollsController = require("./modules/dice/listAllCharacterRolls/listAllCharacterRollsController");
@@ -159,12 +161,28 @@ routes.post(
   assignAttackToCharacter
 );
 
+// REMOVE ATTACK FROM CHARACTER
+routes.delete(
+  "/characters/:character_id/attacks/:attack_id",
+  ensureAuthenticated,
+  ensureAdmin,
+  removeAttackFromCharacter
+);
+
 // ASSIGN RITUAL TO CHARACTER
 routes.post(
   "/characters/:character_id/rituals/:ritual_id",
   ensureAuthenticated,
   ensureAdmin,
   assignRitualToCharacter
+);
+
+// REMOVE RITUAL FROM CHARACTER
+routes.delete(
+  "/characters/:character_id/rituals/:ritual_id",
+  ensureAuthenticated,
+  ensureAdmin,
+  removeRitualFromCharacter
 );
 
 // SEARCH ASSIGNABLE RITUALS
