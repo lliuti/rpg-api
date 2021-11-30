@@ -43,6 +43,9 @@ const rollDice = require("./modules/dice/rollDice/rollDiceController");
 const listAllCharacterRollsController = require("./modules/dice/listAllCharacterRolls/listAllCharacterRollsController");
 const listCriticalsByCharacter = require("./modules/dice/listCriticalsByCharacter/listCriticalsByCharacterController");
 
+const updateCharacterNotes = require("./modules/notes/updateCharacterNotes/updateCharacterNotesController");
+const getCharacterNotes = require("./modules/notes/getCharacterNotes/getCharacterNotesController");
+
 const ensureAuthenticated = require("./middlewares/ensureAuthenticated");
 const ensureAdmin = require("./middlewares/ensureAdmin");
 
@@ -277,3 +280,18 @@ routes.post("/rituals", ensureAuthenticated, ensureAdmin, createRitual);
 routes.get("/rituals", ensureAuthenticated, listRituals);
 
 module.exports = routes;
+
+// NOTES
+
+// CREATE / UPDATE NOTE
+routes.put(
+  "/characters/:character_id/notes",
+  ensureAuthenticated,
+  updateCharacterNotes
+);
+
+routes.get(
+  "/characters/:character_id/notes",
+  ensureAuthenticated,
+  getCharacterNotes
+);
