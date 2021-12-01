@@ -1,7 +1,26 @@
 const prisma = require("../../../database");
 
-const getCharacterSheetService = async (character_id) => {
+const getCharacterSheetService = async ({ character_id, player_id }) => {
   try {
+    const doesCharacterBelongToPlayer = await prisma.character.findFirst({
+      where: {
+        player_id,
+        id: character_id,
+      },
+    });
+
+    const player = await prisma.player.findFirst({
+      where: {
+        id: player_id,
+      },
+    });
+
+    if (!doesCharacterBelongToPlayer && !player.admin) {
+      throw new Error(
+        "Character does not belong to this player / invalid permissions."
+      );
+    }
+
     const character = await prisma.character.findFirst({
       where: {
         id: character_id,
