@@ -12,6 +12,7 @@ const removeRitualFromCharacterService = async ({
       },
     });
   } catch (err) {
+    console.log(err);
     throw new Error("Couldn't remove ritual from character");
   }
 };
