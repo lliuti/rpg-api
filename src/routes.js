@@ -13,6 +13,7 @@ const createCharacter = require("./modules/character/createCharacter/createChara
 const deleteCharacter = require("./modules/character/deleteCharacter/deleteCharacterController");
 const listMyCharacters = require("./modules/character/listMyCharacters/listMyCharactersController");
 const listCharactersForDashboardController = require("./modules/character/listCharactersForDashboard/listCharactersForDashboardController");
+
 const getCharacterSheet = require("./modules/character/getCharacterSheet/getCharacterSheetController");
 const updateCharacterPicture = require("./modules/character/update/updateCharacterPicture/updateCharacterPictureController");
 const updateCharacterLife = require("./modules/character/update/vitals/updateCharacterLife/updateCharacterLifeController");
@@ -38,6 +39,11 @@ const createRitual = require("./modules/ritual/createRitual/createRitualControll
 const listRituals = require("./modules/ritual/listRituals/listRitualsController");
 const searchAssignableRituals = require("./modules/ritual/searchAssignableRituals/searchAssignableRitualsController");
 const removeRitualFromCharacter = require("./modules/ritual/removeRitualFromCharacter/removeRitualFromCharacterController");
+
+const createAbility = require("./modules/ability/createAbility/createAbilityController");
+const listAbilities = require("./modules/ability/listAbilities/listAbilitiesController");
+const assignAbility = require("./modules/ability/assignAbility/assignAbilityController");
+const listCharacterAbilities = require("./modules/ability/listCharacterAbilities/listCharacterAbilitiesController");
 
 const rollDice = require("./modules/dice/rollDice/rollDiceController");
 const listAllCharacterRollsController = require("./modules/dice/listAllCharacterRolls/listAllCharacterRollsController");
@@ -281,6 +287,8 @@ routes.get("/rituals", ensureAuthenticated, listRituals);
 
 module.exports = routes;
 
+// -----------------
+
 // NOTES
 
 // CREATE / UPDATE NOTE
@@ -294,4 +302,29 @@ routes.get(
   "/characters/:character_id/notes",
   ensureAuthenticated,
   getCharacterNotes
+);
+
+// -----------------
+
+// ABILITIES
+
+// CREATE ABILITY
+routes.post("/abilities", ensureAuthenticated, ensureAdmin, createAbility);
+
+// LIST ABILITIES
+routes.get("/abilities", ensureAuthenticated, ensureAdmin, listAbilities);
+
+// LIST CHARACTER ABILITIES
+routes.get(
+  "/characters/:character_id/abilities",
+  ensureAuthenticated,
+  ensureAdmin,
+  listCharacterAbilities
+);
+
+routes.post(
+  "/characters/:character_id/abilities/:ability_id",
+  ensureAuthenticated,
+  ensureAdmin,
+  assignAbility
 );
