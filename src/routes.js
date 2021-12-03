@@ -44,6 +44,8 @@ const createAbility = require("./modules/ability/createAbility/createAbilityCont
 const listAbilities = require("./modules/ability/listAbilities/listAbilitiesController");
 const assignAbility = require("./modules/ability/assignAbility/assignAbilityController");
 const listCharacterAbilities = require("./modules/ability/listCharacterAbilities/listCharacterAbilitiesController");
+const searchAssignableAbilities = require("./modules/ability/searchAssignableAbilities/searchAssignableAbilitiesController");
+const removeAbilityFromCharacter = require("./modules/ability/removeAbilityFromCharacter/removeAbilityFromCharacterController");
 
 const rollDice = require("./modules/dice/rollDice/rollDiceController");
 const listAllCharacterRollsController = require("./modules/dice/listAllCharacterRolls/listAllCharacterRollsController");
@@ -210,6 +212,14 @@ routes.get(
   searchAssignableAttacks
 );
 
+// SEARCH ASSIGNABLE ABILITIES
+routes.get(
+  "/characters/:character_id/abilities/assignable",
+  ensureAuthenticated,
+  ensureAdmin,
+  searchAssignableAbilities
+);
+
 // UPDATE CHARACTER INFO
 routes.put(
   "/characters/:character_id/info",
@@ -322,9 +332,18 @@ routes.get(
   listCharacterAbilities
 );
 
+// ASSIGN ABILITY TO CHARACTER
 routes.post(
   "/characters/:character_id/abilities/:ability_id",
   ensureAuthenticated,
   ensureAdmin,
   assignAbility
+);
+
+// REMOVE ABILITY FROM CHARACTER
+routes.delete(
+  "/characters/:character_id/abilities/:ability_id",
+  ensureAuthenticated,
+  ensureAdmin,
+  removeAbilityFromCharacter
 );
