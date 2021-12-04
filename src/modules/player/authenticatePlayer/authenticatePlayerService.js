@@ -12,9 +12,11 @@ const authenticatePlayerService = async ({ username, password }) => {
         OR: [
           {
             username: usernameLowerCase,
+            mode: "insensitive",
           },
           {
             email: usernameLowerCase,
+            mode: "insensitive",
           },
         ],
       },
