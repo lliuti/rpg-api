@@ -335,7 +335,6 @@ routes.get("/abilities", ensureAuthenticated, ensureAdmin, listAbilities);
 routes.get(
   "/characters/:character_id/abilities",
   ensureAuthenticated,
-  ensureAdmin,
   listCharacterAbilities
 );
 
