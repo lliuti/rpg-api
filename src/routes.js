@@ -36,6 +36,7 @@ const removeAttackFromCharacter = require("./modules/attack/removeAttackFromChar
 const listCharacterRituals = require("./modules/ritual/listCharacterRituals/listCharacterRitualsController");
 const assignRitualToCharacter = require("./modules/ritual/assignRitualToCharacter/assignRitualToCharacterController");
 const createRitual = require("./modules/ritual/createRitual/createRitualController");
+const deleteRitual = require("./modules/ritual/deleteRitual/deleteRitualController");
 const listRituals = require("./modules/ritual/listRituals/listRitualsController");
 const searchAssignableRituals = require("./modules/ritual/searchAssignableRituals/searchAssignableRitualsController");
 const removeRitualFromCharacter = require("./modules/ritual/removeRitualFromCharacter/removeRitualFromCharacterController");
@@ -295,7 +296,13 @@ routes.post("/rituals", ensureAuthenticated, ensureAdmin, createRitual);
 // LIST ALL RITUALS
 routes.get("/rituals", ensureAuthenticated, listRituals);
 
-module.exports = routes;
+// DELETE RITUAL
+routes.delete(
+  "/rituals/:ritual_id",
+  ensureAuthenticated,
+  ensureAdmin,
+  deleteRitual
+);
 
 // -----------------
 
@@ -347,3 +354,5 @@ routes.delete(
   ensureAdmin,
   removeAbilityFromCharacter
 );
+
+module.exports = routes;
