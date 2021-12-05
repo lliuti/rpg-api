@@ -38,6 +38,7 @@ const assignRitualToCharacter = require("./modules/ritual/assignRitualToCharacte
 const createRitual = require("./modules/ritual/createRitual/createRitualController");
 const deleteRitual = require("./modules/ritual/deleteRitual/deleteRitualController");
 const listRituals = require("./modules/ritual/listRituals/listRitualsController");
+const updateRitual = require("./modules/ritual/updateRitual/updateRitualController");
 const searchAssignableRituals = require("./modules/ritual/searchAssignableRituals/searchAssignableRitualsController");
 const removeRitualFromCharacter = require("./modules/ritual/removeRitualFromCharacter/removeRitualFromCharacterController");
 
@@ -302,6 +303,14 @@ routes.delete(
   ensureAuthenticated,
   ensureAdmin,
   deleteRitual
+);
+
+// UPDATE RITUAL
+routes.put(
+  "/rituals/:ritual_id",
+  ensureAuthenticated,
+  ensureAdmin,
+  updateRitual
 );
 
 // -----------------
