@@ -168,7 +168,7 @@ model DiceRolls {
   id                String      @id @default(uuid()) @unique
   createdAt         DateTime    @default(now())
   character_id      String
-  character         Character? @relation(fields: [character_id], references: [id])
+  character         Character? @relation(fields: [character_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   dice_face         String
   dice_result       String
 
@@ -180,7 +180,7 @@ model CharacterNotes {
   createdAt         DateTime    @default(now())
   updatedAt         DateTime    @updatedAt
   character_id      String
-  character         Character? @relation(fields: [character_id], references: [id])
+  character         Character? @relation(fields: [character_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   note_text         String      @default(" ")
   background_text   String      @default(" ")
 
