@@ -43,6 +43,7 @@ const searchAssignableRituals = require("./modules/ritual/searchAssignableRitual
 const removeRitualFromCharacter = require("./modules/ritual/removeRitualFromCharacter/removeRitualFromCharacterController");
 
 const createAbility = require("./modules/ability/createAbility/createAbilityController");
+const editAbility = require("./modules/ability/editAbility/editAbilityController");
 const listAbilities = require("./modules/ability/listAbilities/listAbilitiesController");
 const assignAbility = require("./modules/ability/assignAbility/assignAbilityController");
 const listCharacterAbilities = require("./modules/ability/listCharacterAbilities/listCharacterAbilitiesController");
@@ -336,6 +337,8 @@ routes.get(
 
 // CREATE ABILITY
 routes.post("/abilities", ensureAuthenticated, ensureAdmin, createAbility);
+
+routes.put("/abilities", ensureAuthenticated, ensureAdmin, editAbility);
 
 // LIST ABILITIES
 routes.get("/abilities", ensureAuthenticated, ensureAdmin, listAbilities);
