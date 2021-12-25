@@ -338,7 +338,13 @@ routes.get(
 // CREATE ABILITY
 routes.post("/abilities", ensureAuthenticated, ensureAdmin, createAbility);
 
-routes.put("/abilities", ensureAuthenticated, ensureAdmin, editAbility);
+// UPDATE ABILITY
+routes.put(
+  "/abilities/:ability_id",
+  ensureAuthenticated,
+  ensureAdmin,
+  editAbility
+);
 
 // LIST ABILITIES
 routes.get("/abilities", ensureAuthenticated, ensureAdmin, listAbilities);
