@@ -44,6 +44,7 @@ const removeRitualFromCharacter = require("./modules/ritual/removeRitualFromChar
 
 const createAbility = require("./modules/ability/createAbility/createAbilityController");
 const editAbility = require("./modules/ability/editAbility/editAbilityController");
+const deleteAbility = require("./modules/ability/deleteAbility/deleteAbilityController");
 const listAbilities = require("./modules/ability/listAbilities/listAbilitiesController");
 const assignAbility = require("./modules/ability/assignAbility/assignAbilityController");
 const listCharacterAbilities = require("./modules/ability/listCharacterAbilities/listCharacterAbilitiesController");
@@ -344,6 +345,14 @@ routes.put(
   ensureAuthenticated,
   ensureAdmin,
   editAbility
+);
+
+// DELETE ABILITY
+routes.delete(
+  "/abilities/:ability_id",
+  ensureAuthenticated,
+  ensureAdmin,
+  deleteAbility
 );
 
 // LIST ABILITIES
