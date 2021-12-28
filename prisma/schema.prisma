@@ -128,7 +128,7 @@ model CharacterAttacks {
   character_id      String
   character         Character?  @relation(fields: [character_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   attack_id      String
-  attack         Attack?  @relation(fields: [attack_id], references: [id])
+  attack         Attack?  @relation(fields: [attack_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("character_attacks")
 }
@@ -159,7 +159,7 @@ model CharacterRituals {
   character_id      String
   character         Character?  @relation(fields: [character_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   ritual_id         String
-  ritual            Ritual?  @relation(fields: [ritual_id], references: [id])
+  ritual            Ritual?  @relation(fields: [ritual_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("character_rituals")
 }
@@ -203,7 +203,7 @@ model CharacterAbilities {
   createdAt         DateTime    @default(now())
   updatedAt         DateTime    @updatedAt
   ability_id        String
-  ability           Ability?  @relation(fields: [ability_id], references: [id])
+  ability           Ability?  @relation(fields: [ability_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   character_id      String
   character         Character?  @relation(fields: [character_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
