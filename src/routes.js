@@ -317,7 +317,7 @@ routes.put(
 );
 
 // UPDATE ALL RITUALS
-routes.put("/rituals/all", ensureAuthenticated, ensureAdmin, updateRituals);
+routes.put("/rituals", ensureAuthenticated, ensureAdmin, updateRituals);
 
 // -----------------
 
