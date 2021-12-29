@@ -1,9 +1,9 @@
 const prisma = require("../../../database");
 
-const updateRitualsService = async (data) => {
+const updateRitualsService = async ({ data }) => {
   try {
     await prisma.ritual.updateMany({
-      data,
+      data: data,
     });
   } catch (err) {
     console.log(err);
