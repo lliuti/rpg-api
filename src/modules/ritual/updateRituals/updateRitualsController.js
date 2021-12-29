@@ -2,10 +2,9 @@ const updateRitualsService = require("./updateRitualsService");
 
 const updateRitualsController = async (req, res) => {
   const data = req.body;
-  console.log(data);
 
   try {
-    await updateRitualsService(data);
+    await updateRitualsService({ data });
     return res.status(201).send();
   } catch (err) {
     console.log(err);
