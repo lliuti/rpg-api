@@ -2,6 +2,7 @@ const updateRitualsService = require("./updateRitualsService");
 
 const updateRitualsController = async (req, res) => {
   const data = req.body;
+  console.log(data);
 
   try {
     await updateRitualsService(data);
