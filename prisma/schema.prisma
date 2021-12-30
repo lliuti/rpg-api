@@ -37,11 +37,13 @@ model Character {
   archetype   String?     @default("-")
   exp         String?     @default("50%")
   sheet       Sheet?
+  max_weight  Int?        @default(8)
   character_attacks   CharacterAttacks[]  
   character_rituals   CharacterRituals[]  
   character_rolls     DiceRolls[]
   character_notes     CharacterNotes[]
   character_abilities CharacterAbilities[]
+  character_inventory CharacterInventory[]
 
   @@map("characters")
 }
@@ -208,4 +210,15 @@ model CharacterAbilities {
   character         Character?  @relation(fields: [character_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("character_abilities")
+}
+
+model CharacterInventory {
+  id                String      @id @default(uuid()) @unique
+  updatedAt         DateTime    @updatedAt
+  character_id      String
+  character         Character?  @relation(fields: [character_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  item              String
+  weight            Int
+
+  @@map("character_inventory")
 }
