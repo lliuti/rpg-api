@@ -218,7 +218,7 @@ model CharacterInventory {
   character_id      String
   character         Character?  @relation(fields: [character_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   item              String
-  weight            Int
+  weight            Float
 
   @@map("character_inventory")
 }
