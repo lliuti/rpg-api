@@ -22,7 +22,7 @@ const addItemService = async ({ character_id, item, weight }) => {
       },
     });
 
-    const currentCapacity = parseInt(currentCapacityStr._sum.weight);
+    const currentCapacity = parseFloat(currentCapacityStr._sum.weight);
 
     if (currentCapacity + weight > character.max_weight) {
       throw new Error("Couldn't add item. Maximum capacity reached");
