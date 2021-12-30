@@ -6,7 +6,7 @@ const updateCharacterLifeController = async (req, res) => {
   try {
     const lifePoints = await updateCharacterLifeService({
       character_id,
-      currLife,
+      currLife: currLife.toString(),
       maxLife,
     });
     return res.status(201).json(lifePoints);
