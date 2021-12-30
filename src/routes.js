@@ -25,6 +25,7 @@ const updateCharacterSkills = require("./modules/character/update/updateCharacte
 const updateCharacterDefenses = require("./modules/character/update/updateCharacterDefenses/updateCharacterDefensesController");
 
 const listCharacterAttacks = require("./modules/attack/listCharacterAttacks/listCharacterAttacksController");
+const listGuns = require("./modules/attack/listGuns/listGunsController");
 const assignAttackToCharacter = require("./modules/attack/assignAttackToCharacter/assignAttackToCharacterController");
 const createAttack = require("./modules/attack/createAttack/createAttackController");
 const editAttack = require("./modules/attack/editAttack/editAttackController");
@@ -315,6 +316,9 @@ routes.delete(
   ensureAdmin,
   deleteAttack
 );
+
+// LIST CHARACTER GUNS
+routes.get("/characters/:character_id/guns", ensureAuthenticated, listGuns);
 
 // -----------------
 
