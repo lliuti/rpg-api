@@ -15,6 +15,7 @@ const createCharacterService = async ({
         player_id,
         age,
         archetype,
+        max_weight: archetype === "Combatente" ? 10 : 8,
       },
     });
 
