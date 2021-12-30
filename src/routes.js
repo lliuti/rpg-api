@@ -52,6 +52,10 @@ const listCharacterAbilities = require("./modules/ability/listCharacterAbilities
 const searchAssignableAbilities = require("./modules/ability/searchAssignableAbilities/searchAssignableAbilitiesController");
 const removeAbilityFromCharacter = require("./modules/ability/removeAbilityFromCharacter/removeAbilityFromCharacterController");
 
+const addItem = require("./modules/inventory/addItem/addItemController");
+const listItems = require("./modules/inventory/listItems/listItemsController");
+const removeItem = require("./modules/inventory/removeItem/removeItemController");
+
 const rollDice = require("./modules/dice/rollDice/rollDiceController");
 const listAllCharacterRollsController = require("./modules/dice/listAllCharacterRolls/listAllCharacterRollsController");
 const listCriticalsByCharacter = require("./modules/dice/listCriticalsByCharacter/listCriticalsByCharacterController");
@@ -251,6 +255,27 @@ routes.put(
   "/characters/:character_id/defenses",
   ensureAuthenticated,
   updateCharacterDefenses
+);
+
+// ADD ITEM TO INVENTORY
+routes.post(
+  "/characters/:character_id/inventory",
+  ensureAuthenticated,
+  addItem
+);
+
+// LIST ITEMS
+routes.get(
+  "/characters/:character_id/inventory",
+  ensureAuthenticated,
+  listItems
+);
+
+// REMOVE ITEM
+routes.delete(
+  "/characters/:character_id/inventory/:item_id",
+  ensureAuthenticated,
+  removeItem
 );
 
 // -----------------
