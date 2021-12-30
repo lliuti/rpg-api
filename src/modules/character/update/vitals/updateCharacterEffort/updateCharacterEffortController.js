@@ -6,7 +6,7 @@ const updateCharacterEffortController = async (req, res) => {
   try {
     const effortPoints = await updateCharacterEffortService({
       character_id,
-      currEff,
+      currEff: currEff.toString(),
       maxEff,
     });
     return res.status(201).json(effortPoints);
