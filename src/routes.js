@@ -318,7 +318,11 @@ routes.delete(
 );
 
 // LIST CHARACTER GUNS
-routes.get("/characters/:character_id/guns", ensureAuthenticated, listGuns);
+routes.get(
+  "/characters/:character_id/attacks/guns",
+  ensureAuthenticated,
+  listGuns
+);
 
 // -----------------
 
