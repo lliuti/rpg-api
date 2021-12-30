@@ -13,6 +13,7 @@ const listGunsService = async (character_id) => {
         attack: {
           select: {
             name: true,
+            ammo: true,
           },
         },
       },
