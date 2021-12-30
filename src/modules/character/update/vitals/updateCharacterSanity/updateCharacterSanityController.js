@@ -6,7 +6,7 @@ const updateCharacterSanityController = async (req, res) => {
   try {
     const sanityPoints = await updateCharacterSanityService({
       character_id,
-      currSan,
+      currSan: currSan.toString(),
       maxSan,
     });
     return res.status(201).json(sanityPoints);
