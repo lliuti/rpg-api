@@ -131,7 +131,8 @@ model CharacterAttacks {
   character_id      String
   character         Character?  @relation(fields: [character_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   attack_id      String
-  attack         Attack?  @relation(fields: [attack_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  attack         Attack?        @relation(fields: [attack_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  curr_shots     Int?           @default(0)
 
   @@map("character_attacks")
 }
