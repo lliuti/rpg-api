@@ -9,6 +9,13 @@ const listGunsService = async (character_id) => {
         },
         character_id,
       },
+      select: {
+        attack: {
+          select: {
+            name: true,
+          },
+        },
+      },
     });
 
     return list;
