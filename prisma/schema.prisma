@@ -117,6 +117,7 @@ model Attack {
   criticalDamage    String?
   weight            String?
   description       String?
+  ammo              Int?        @default(0)
 
   characters        CharacterAttacks[]
 
