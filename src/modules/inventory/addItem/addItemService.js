@@ -17,6 +17,9 @@ const addItemService = async ({ character_id, item, weight }) => {
     }
 
     const currentCapacityStr = await prisma.characterInventory.aggregate({
+      where: {
+        character_id,
+      },
       _sum: {
         weight: true,
       },
