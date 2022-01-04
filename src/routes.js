@@ -25,7 +25,9 @@ const updateCharacterSkills = require("./modules/character/update/updateCharacte
 const updateCharacterDefenses = require("./modules/character/update/updateCharacterDefenses/updateCharacterDefensesController");
 
 const listCharacterAttacks = require("./modules/attack/listCharacterAttacks/listCharacterAttacksController");
-const listGuns = require("./modules/attack/listGuns/listGunsController");
+const listGuns = require("./modules/attack/guns/listGuns/listGunsController");
+const shoot = require("./modules/attack/guns/shoot/shootController");
+const reload = require("./modules/attack/guns/reload/reloadController");
 const assignAttackToCharacter = require("./modules/attack/assignAttackToCharacter/assignAttackToCharacterController");
 const createAttack = require("./modules/attack/createAttack/createAttackController");
 const editAttack = require("./modules/attack/editAttack/editAttackController");
@@ -322,6 +324,20 @@ routes.get(
   "/characters/:character_id/attacks/guns",
   ensureAuthenticated,
   listGuns
+);
+
+// SHOOT
+routes.post(
+  "/characters/:character_id/attacks/:attack_id/shoot",
+  ensureAuthenticated,
+  shoot
+);
+
+// RELOAD
+routes.post(
+  "/characters/:character_id/attacks/:attack_id/reload",
+  ensureAuthenticated,
+  reload
 );
 
 // -----------------
