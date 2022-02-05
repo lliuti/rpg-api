@@ -25,6 +25,9 @@ const listItemsService = async (character_id) => {
       where: {
         character_id,
       },
+      orderBy: {
+        weight: "desc",
+      },
     });
 
     const responseObject = {
