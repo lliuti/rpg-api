@@ -58,6 +58,7 @@ const removeAbilityFromCharacter = require("./modules/ability/removeAbilityFromC
 const addItem = require("./modules/inventory/addItem/addItemController");
 const listItems = require("./modules/inventory/listItems/listItemsController");
 const removeItem = require("./modules/inventory/removeItem/removeItemController");
+const updateItem = require("./modules/inventory/updateItem/updateItemController");
 
 const rollDice = require("./modules/dice/rollDice/rollDiceController");
 const listAllCharacterRollsController = require("./modules/dice/listAllCharacterRolls/listAllCharacterRollsController");
@@ -279,6 +280,13 @@ routes.delete(
   "/characters/:character_id/inventory/:item_id",
   ensureAuthenticated,
   removeItem
+);
+
+// UPDATE ITEM
+routes.put(
+  "/characters/:character_id/inventory/:item_id",
+  ensureAuthenticated,
+  updateItem
 );
 
 // -----------------
